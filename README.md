@@ -27,6 +27,10 @@ The comparison points for v0.1 are the 29 October 2026 Polymarket and Binance fa
 
 Errors, missing files, and blind telemetry become `needs_human`. That status is not an all-clear. Exit codes: `0` ok, `1` usage, `2` finding, `3` needs-human.
 
+## Five-minute demo
+
+`perimeterctl demo script-drift --home ./demo-home` serves a local origin on `127.0.0.1` only. It flips a fixture script, records a `finding` for `demo-vendor`, and writes a freeze draft whose first line is `SENT: false`. Notice is not prevention. The draft is unsent. Nothing is applied at an edge, and the command does not claim the site is safe. `time-to-contain` stays open unless you pass `--mark-contain`.
+
 ## Quickstart
 
 Requires Go 1.22 or newer.
