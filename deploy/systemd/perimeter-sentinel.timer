@@ -1,0 +1,11 @@
+[Unit]
+Description=Run the Perimeter Sentinel on-chain watch at least every 60 seconds
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=30s
+AccuracySec=1s
+Unit=perimeter-sentinel.service
+
+[Install]
+WantedBy=timers.target

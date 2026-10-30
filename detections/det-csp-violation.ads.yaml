@@ -1,0 +1,13 @@
+id: det-csp-violation
+goal: Keep an in-scope CSP or Reporting API violation as evidence.
+attack: T1195.001
+data_sources:
+  - CSP report body
+blind_spots:
+  - Reports whose document is outside scope are dropped. A report is not proof of cause.
+false_positives:
+  - A browser extension the operator already expects on a staff workstation.
+validation: go test ./watchers/csp-reports
+playbook: vendor-script-compromise
+lesson: L7 third-party browser scripts are supply chain
+cia: integrity

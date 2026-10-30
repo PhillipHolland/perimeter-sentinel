@@ -1,0 +1,14 @@
+title: Vendor script hash drift on an in-scope page
+id: 8f0c2a10-6b1e-4c1a-9a4e-0c29sentinel01
+status: experimental
+description: A served vendor script hash differs from the approved baseline. Synthetic detection only.
+logsource:
+  product: perimeter-sentinel
+  service: third-party-scripts
+detection:
+  selection:
+    detection: det-vendor-script-drift
+  condition: selection
+level: high
+falsepositives:
+  - A vendor publish already written into the approved baseline

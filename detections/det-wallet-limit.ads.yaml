@@ -1,0 +1,14 @@
+id: det-wallet-limit
+goal: Page when an operator-supplied transfer value exceeds the declared hot-wallet limit.
+attack: T1078
+data_sources:
+  - operator-supplied transfer observation
+  - declared limit
+blind_spots:
+  - A missing limit on a hot wallet is itself a finding. Sentinel does not set the limit.
+false_positives:
+  - A limit the operator raised in the declaration before the observation.
+validation: go test ./watchers/onchain
+playbook: hot-wallet-drain
+lesson: L8 signing path is part of the key
+cia: integrity

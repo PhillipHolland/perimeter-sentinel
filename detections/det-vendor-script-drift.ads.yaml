@@ -1,0 +1,16 @@
+id: det-vendor-script-drift
+goal: Notice when a vendor-hosted script on an in-scope page no longer matches the approved hash.
+attack: T1195.001
+data_sources:
+  - served page HTML
+  - fetched script body
+  - approved hash baseline
+blind_spots:
+  - A script that is not referenced by an in-scope page is not fetched.
+  - A vantage that cannot reach the page is needs_human, not an all-clear.
+false_positives:
+  - A vendor publish the operator already approved and wrote into the baseline.
+validation: go test ./drills/oct29 oct29-vendor-script and go test ./watchers/third-party-scripts
+playbook: vendor-script-compromise
+lesson: L7 third-party browser scripts are supply chain
+cia: integrity

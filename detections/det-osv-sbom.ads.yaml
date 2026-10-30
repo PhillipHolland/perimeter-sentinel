@@ -1,0 +1,14 @@
+id: det-osv-sbom
+goal: Match an OSV advisory to a component name and version in the operator's SBOM.
+attack: T1195
+data_sources:
+  - OSV JSON supplied by the operator
+  - SBOM components
+blind_spots:
+  - No version match is not an all-clear when the SBOM is absent.
+false_positives:
+  - An advisory the operator has already excepted in writing, with a review date.
+validation: go test ./watchers/osv
+playbook: none
+lesson: L7 supply chain
+cia: integrity

@@ -1,0 +1,8 @@
+/bin/
+/dist/
+/.perimeter/
+/demo-home/
+*.out
+coverage.txt
+*.test
+.DS_Store

@@ -1,0 +1,77 @@
+{
+  "id": "vendor-script-compromise",
+  "title": "Vendor script compromise",
+  "summary": "A third-party script on a page the operator runs no longer matches the approved hash, or a new script appeared beside a session.",
+  "lesson": "L7 third-party browser scripts are supply chain",
+  "breaks_link": "actions on objectives, by cancel-only and a session refresh; delivery, by a CSP denial of the vendor origin at the operator's own edge",
+  "requires_oob": true,
+  "expires_after": "4h",
+  "required_contacts": [
+    "cdn",
+    "status-page"
+  ],
+  "steps": [
+    {
+      "id": "oob",
+      "text": "Confirm on a second channel that this freeze was requested by a human you already trust. Sentinel did not place this call.",
+      "owner": "incident-commander",
+      "lesson": "L9 freezes thaw and are verified out of band"
+    },
+    {
+      "id": "name-vendor",
+      "text": "Read the finding. Name the page, the vendor, and the script URL. Do not paste script bodies into chat.",
+      "owner": "ops",
+      "lesson": "L7 third-party browser scripts are supply chain"
+    },
+    {
+      "id": "cancel-only",
+      "text": "On your own trading or session system, switch to the pre-approved cancel-only or read-only mode. Sentinel cannot flip this switch.",
+      "owner": "ops",
+      "lesson": "L9 freezes thaw and are verified out of band"
+    },
+    {
+      "id": "pause-relayer",
+      "text": "Pause your own relayer or embedded signer so open tabs cannot keep signing. A front-end deploy does not reach those tabs.",
+      "owner": "ops",
+      "lesson": "L8 signing path is part of the key"
+    },
+    {
+      "id": "refresh-sessions",
+      "text": "Revoke sessions and tokens so already-open tabs lose authority.",
+      "owner": "ops",
+      "lesson": "L8 signing path is part of the key"
+    },
+    {
+      "id": "csp-kill",
+      "text": "At your own edge, deny the vendor origin in CSP. This is your config change, made by your change process.",
+      "owner": "ops",
+      "lesson": "L7 third-party browser scripts are supply chain"
+    },
+    {
+      "id": "drafts",
+      "text": "Review the drafts. You send them. Sentinel does not.",
+      "owner": "comms",
+      "lesson": "L6 incident response"
+    },
+    {
+      "id": "change-card",
+      "text": "Open a change card to remove the vendor tag, pin or self-host what you still need, and keep vendor script off session pages.",
+      "owner": "ops",
+      "lesson": "L7 third-party browser scripts are supply chain"
+    }
+  ],
+  "drafts": [
+    "vendor.md",
+    "status-page.md",
+    "users.md",
+    "law-enforcement.md"
+  ],
+  "thaw": [
+    "Envelope expiry has passed, or the commander ends it early in writing.",
+    "Vendor origin is still denied until a new hash is approved.",
+    "Sessions that overlapped the bad hash were revoked.",
+    "A root-cause card exists. It cites the lesson id and the ledger seq.",
+    "Out-of-band confirm that thaw was requested by the commander."
+  ],
+  "envelope_class": "vendor-script-compromise"
+}

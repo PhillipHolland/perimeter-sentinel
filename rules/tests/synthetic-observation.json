@@ -1,0 +1,7 @@
+{
+  "note": "Synthetic fixture. Not a live observation and not an instruction.",
+  "page": "https://staging.example/trade",
+  "script": "https://cdn.vendor.example/rum.js",
+  "approved_hash_label": "baseline",
+  "served_hash_label": "changed"
+}

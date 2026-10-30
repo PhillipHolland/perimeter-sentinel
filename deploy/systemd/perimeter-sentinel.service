@@ -1,0 +1,14 @@
+[Unit]
+Description=Perimeter Sentinel read-only watch (one shot)
+Documentation=https://github.com/perimeter-sentinel/perimeter-sentinel
+
+[Service]
+Type=oneshot
+User=perimeter
+WorkingDirectory=/var/lib/perimeter-sentinel
+ExecStart=/usr/local/bin/perimeterctl --home /var/lib/perimeter-sentinel watch onchain --declaration /var/lib/perimeter-sentinel/wallet.json --observation /var/lib/perimeter-sentinel/observation.json
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/var/lib/perimeter-sentinel

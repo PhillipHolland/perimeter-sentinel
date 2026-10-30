@@ -1,0 +1,5 @@
+title = "perimeter-sentinel"
+
+[allowlist]
+description = "Rejection fixture. The test asserts this banner is refused."
+paths = ['''internal/secrets/secrets_test\.go''']

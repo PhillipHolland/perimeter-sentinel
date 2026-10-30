@@ -1,0 +1,14 @@
+id: det-dns-drift
+goal: Notice when observed DNS for a declared name differs from the desired snapshot.
+attack: T1584.002
+data_sources:
+  - desired DNS snapshot
+  - observed DNS snapshot
+blind_spots:
+  - A CNAME that leaves scope is not chased. That blind spot is reported.
+false_positives:
+  - A planned cutover whose desired snapshot was updated first.
+validation: go test ./watchers/dns
+playbook: none
+lesson: L2 govern before detect
+cia: integrity

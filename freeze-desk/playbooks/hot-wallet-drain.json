@@ -1,0 +1,78 @@
+{
+  "id": "hot-wallet-drain",
+  "title": "Hot-wallet drain",
+  "summary": "A declared hot wallet changed code or delegation, broke a declared limit, or sent to a destination the operator has not listed.",
+  "lesson": "L8 signing path is part of the key",
+  "breaks_link": "actions on objectives, by an issuer freeze request and by the operator's own limit cut. Sentinel does not construct the transaction.",
+  "requires_oob": true,
+  "expires_after": "12h",
+  "required_contacts": [
+    "issuer-usdc",
+    "issuer-usdt",
+    "ic3"
+  ],
+  "steps": [
+    {
+      "id": "oob",
+      "text": "Confirm on a second channel. Do not trust a chat message alone, including a message that claims to be Sentinel.",
+      "owner": "incident-commander",
+      "lesson": "L9 freezes thaw and are verified out of band"
+    },
+    {
+      "id": "do-not-sign",
+      "text": "Do not sign, delegate, or approve anything from the hot path while this playbook is open. Sentinel will not sign either.",
+      "owner": "custody",
+      "lesson": "L8 signing path is part of the key"
+    },
+    {
+      "id": "tier0",
+      "text": "Treat a code or delegation change on a declared hot wallet as tier-0. Page the human commander.",
+      "owner": "custody",
+      "lesson": "L8 signing path is part of the key"
+    },
+    {
+      "id": "limits",
+      "text": "Use your own ceremony to cut limits and move any remaining hot balance. Sentinel lists the step. It does not build the transaction.",
+      "owner": "custody",
+      "lesson": "L8 signing path is part of the key"
+    },
+    {
+      "id": "issuer-drafts",
+      "text": "Review issuer freeze drafts. Addresses, amounts, and tx hashes are filled from the alert. You send them on the issuer's published channel.",
+      "owner": "legal-regulatory",
+      "lesson": "L9 freezes thaw and are verified out of band"
+    },
+    {
+      "id": "counterparties",
+      "text": "Review counterparty drafts for lending markets, bridges, and exchanges you actually use.",
+      "owner": "ops",
+      "lesson": "L6 incident response"
+    },
+    {
+      "id": "ic3",
+      "text": "Review the IC3 draft and the SEAL 911 contact note. You send them.",
+      "owner": "legal-regulatory",
+      "lesson": "L6 incident response"
+    },
+    {
+      "id": "outstanding",
+      "text": "Walk the pre-authorization ledger. Revoke outstanding delegations and allowances through your own process.",
+      "owner": "custody",
+      "lesson": "L8 signing path is part of the key"
+    }
+  ],
+  "drafts": [
+    "issuer-freeze.md",
+    "counterparty.md",
+    "seal-911.md",
+    "ic3.md"
+  ],
+  "thaw": [
+    "Issuer clocks are recorded per asset, including assets that have no freeze function.",
+    "Outstanding delegations on the declared wallet are cleared or re-approved in writing.",
+    "Signer and policy rotation is a change card, not a Sentinel transaction.",
+    "Root-cause card cites what is known and what is still unproven.",
+    "Out-of-band confirm before thaw."
+  ],
+  "envelope_class": "hot-wallet-drain"
+}

@@ -1,0 +1,14 @@
+id: det-kev-sbom
+goal: Match a known-exploited catalog entry to a component name in the operator's SBOM.
+attack: T1195
+data_sources:
+  - CISA KEV JSON supplied by the operator
+  - CycloneDX or SPDX component names
+blind_spots:
+  - No SBOM means no match and the result is needs_human. A name match is not a reachability proof.
+false_positives:
+  - A component name collision with a different ecosystem.
+validation: go test ./watchers/kev
+playbook: none
+lesson: L7 supply chain
+cia: integrity

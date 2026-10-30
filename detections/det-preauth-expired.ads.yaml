@@ -1,0 +1,13 @@
+id: det-preauth-expired
+goal: Notice outstanding authority that is past its expiry, and hot authority with no limit.
+attack: T1550
+data_sources:
+  - pre-authorization ledger
+blind_spots:
+  - A missing ledger file is an empty book only on first read. Secrets are rejected and are not stored.
+false_positives:
+  - An authority the operator has already marked not outstanding.
+validation: go test ./internal/preauth
+playbook: hot-wallet-drain
+lesson: L8 signing path is part of the key
+cia: integrity

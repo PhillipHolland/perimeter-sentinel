@@ -1,0 +1,15 @@
+id: det-wallet-delegation
+goal: Page when declared hot-wallet code shows an EIP-7702 delegation designator.
+attack: T1078
+data_sources:
+  - read-only eth_getCode
+  - operator wallet declaration
+blind_spots:
+  - RPC error is needs_human. Sentinel does not sign and does not hold a key.
+  - Root cause of the Oct 29 Binance event is undisclosed. This watch does not claim that cause.
+false_positives:
+  - A delegation the operator already listed as known code.
+validation: go test ./drills/oct29 oct29-delegation and go test ./watchers/onchain
+playbook: hot-wallet-drain
+lesson: L8 signing path is part of the key
+cia: integrity

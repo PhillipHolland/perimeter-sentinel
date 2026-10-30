@@ -1,0 +1,14 @@
+title: Declared hot wallet code shows a delegation designator
+id: 8f0c2a10-6b1e-4c1a-9a4e-0c29sentinel02
+status: experimental
+description: Read-only code on a declared wallet changed to a delegation designator. No transaction is built.
+logsource:
+  product: perimeter-sentinel
+  service: onchain
+detection:
+  selection:
+    detection: det-wallet-delegation
+  condition: selection
+level: critical
+falsepositives:
+  - A delegation the operator already listed as known code

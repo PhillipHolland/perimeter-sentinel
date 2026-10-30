@@ -1,0 +1,13 @@
+id: det-ct-issuer
+goal: Notice a certificate transparency entry whose issuer is not on the operator's expected list.
+attack: T1587.003
+data_sources:
+  - CT JSON supplied by the operator
+blind_spots:
+  - v0.1 reads JSON. It does not run certspotter. A missing feed is needs_human.
+false_positives:
+  - A new issuer the operator added to the expected list before the entry.
+validation: go test ./watchers/ct
+playbook: none
+lesson: L5 no logs no claim
+cia: integrity

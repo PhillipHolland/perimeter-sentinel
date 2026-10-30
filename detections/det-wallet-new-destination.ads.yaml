@@ -1,0 +1,14 @@
+id: det-wallet-new-destination
+goal: Page when an operator-supplied transfer leaves a declared hot wallet for a destination that is not on the declaration.
+attack: T1078
+data_sources:
+  - operator-supplied transfer observation
+  - declared destination list
+blind_spots:
+  - Transfers are observations the operator supplies. This watcher does not scan a mempool and does not construct a transaction.
+false_positives:
+  - A destination added to the declaration before the transfer.
+validation: go test ./watchers/onchain
+playbook: hot-wallet-drain
+lesson: L8 signing path is part of the key
+cia: integrity

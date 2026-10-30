@@ -1,0 +1,14 @@
+id: det-tls-drift
+goal: Notice fingerprint, issuer, or near-expiry changes on a declared HTTPS name.
+attack: T1587.003
+data_sources:
+  - baseline certificate snapshot
+  - observed certificate snapshot
+blind_spots:
+  - Dial refuses to skip certificate verification. A handshake error is needs_human.
+false_positives:
+  - A planned renewal whose baseline was updated after the operator checked the issuer.
+validation: go test ./watchers/tls
+playbook: none
+lesson: L5 no logs no claim
+cia: integrity

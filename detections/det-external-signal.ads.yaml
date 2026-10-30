@@ -1,0 +1,13 @@
+id: det-external-signal
+goal: Notice a post that names the brand and an alert word, or a named account and an alert word.
+attack: T1589
+data_sources:
+  - operator-supplied post batch
+blind_spots:
+  - An empty watch list or a batch error is needs_human. v0.1 does not call the X API.
+false_positives:
+  - A drill post or a status update that uses the alert word about a different system. A human reads the draft.
+validation: go test ./drills/oct29 oct29-external-signal and go test ./watchers/external-intake
+playbook: vendor-script-compromise,hot-wallet-drain
+lesson: L3 detect behaviors, not indicators
+cia: integrity

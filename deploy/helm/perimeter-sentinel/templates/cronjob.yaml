@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: perimeter-sentinel
+spec:
+  schedule: {{ .Values.schedule | quote }}
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          automountServiceAccountToken: false
+          containers:
+            - name: perimeterctl
+              image: {{ .Values.image | quote }}
+              args: ["--home", {{ .Values.homeMount | quote }}, "version"]
+              securityContext:
+                runAsNonRoot: true
+                runAsUser: 65532
+                readOnlyRootFilesystem: true
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop: ["ALL"]
+              volumeMounts:
+                - name: home
+                  mountPath: {{ .Values.homeMount | quote }}
+          volumes:
+            - name: home
+              emptyDir: {}

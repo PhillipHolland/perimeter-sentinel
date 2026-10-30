@@ -1,0 +1,21 @@
+# Lane names for an edge the operator already runs.
+# Sentinel assigns a name. Apply stays false in v0.1.
+lanes:
+  - id: human
+    note: session-proven person
+  - id: verified-agent
+    note: RFC 9421 signature checked against a pinned directory; fraud checks stay on
+  - id: declared-automation
+    note: claims to be a bot and is unsigned
+  - id: unknown-automation
+    note: no session and no declaration
+  - id: quarantine
+    note: tripwire hit or operator-declared shed; alert and lane only
+rules:
+  - id: identity-is-not-intent
+    when: verified-agent and fraud-signal
+    then: keep fraud checks
+  - id: tripwire
+    when: decoy used on an owned route
+    then: alert and advise quarantine
+    never: instruct a visitor to fetch or run code

@@ -1,0 +1,13 @@
+id: det-tripwire-hit
+goal: Alert when a decoy on the operator's own property is used, and name the quarantine lane.
+attack: T1078
+data_sources:
+  - decoy hit on an owned route
+blind_spots:
+  - The tripwire body is a fixed marker. It never tells a visitor to fetch or run code.
+false_positives:
+  - An operator drill that hits the decoy on purpose. Record the drill in the ledger.
+validation: go test ./internal/tripwire
+playbook: none
+lesson: L3 detect behaviors, not indicators
+cia: integrity

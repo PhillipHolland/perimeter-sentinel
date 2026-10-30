@@ -1,0 +1,13 @@
+id: det-swarm-behavior
+goal: Describe swarm-shaped behavior from features the operator already collected. An IP list alone is needs_human.
+attack: T1498
+data_sources:
+  - operator feature counts across routes
+blind_spots:
+  - IP-only or hash-only input is rejected. The edge enforces. Sentinel does not block inline.
+false_positives:
+  - A known product launch whose surge was declared on the calendar.
+validation: go test ./internal/correlate
+playbook: none
+lesson: L3 detect behaviors, not indicators
+cia: availability

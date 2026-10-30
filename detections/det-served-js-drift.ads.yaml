@@ -1,0 +1,16 @@
+id: det-served-js-drift
+goal: Compare script hashes the world is served with the signed build manifest.
+attack: T1195.001
+data_sources:
+  - served page
+  - signed build manifest
+  - signer pin
+blind_spots:
+  - A match without a signer pin is needs_human. Signed is not safe.
+  - Split-view across vantages is a finding, not an average.
+false_positives:
+  - A new release whose manifest and signer pin were updated together.
+validation: go test ./watchers/served-js
+playbook: vendor-script-compromise
+lesson: L6 signed is not safe
+cia: integrity

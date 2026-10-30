@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/perimeter-sentinel/perimeter-sentinel/freeze-desk/roster.schema.json",
+  "title": "Perimeter Sentinel freeze roster",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["people", "contacts"],
+  "properties": {
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "name", "oob"],
+        "properties": {
+          "role": { "type": "string", "minLength": 1 },
+          "name": { "type": "string" },
+          "oob": { "type": "string", "description": "Out-of-band channel label. Not a secret." },
+          "fingerprint": { "type": "string" }
+        }
+      }
+    },
+    "contacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "template"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "org": { "type": "string" },
+          "channel": { "type": "string", "description": "Where the operator will send. Sentinel does not send." },
+          "template": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+id: det-signer-identity
+goal: Refuse to treat a hash match as safe when the signer pin is empty or the manifest signer differs.
+attack: T1195.001
+data_sources:
+  - signer pin
+  - build manifest
+blind_spots:
+  - v0.1 does not query Rekor. An empty pin is needs_human.
+false_positives:
+  - A pin update that names the same repo, workflow, and ref the operator reviewed.
+validation: go test ./watchers/served-js
+playbook: vendor-script-compromise
+lesson: L6 signed is not safe
+cia: integrity
