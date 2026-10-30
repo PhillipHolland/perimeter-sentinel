@@ -92,6 +92,8 @@ func Run(args []string, stdout, stderr io.Writer) int {
 		return cmdFreeze(home, sub, stdout, stderr)
 	case "drill":
 		return cmdDrill(home, sub, stdout, stderr)
+	case "demo":
+		return cmdDemo(home, sub, stdout, stderr)
 	default:
 		fmt.Fprintf(stderr, "unknown command %q\n", cmd)
 		usage(stderr)

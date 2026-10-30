@@ -379,7 +379,7 @@ func writeDrafts(dir string, run Run, pb Playbook) ([]Draft, error) {
 	}
 	var out []Draft
 	for _, name := range pb.Drafts {
-		body := render(name, run.Facts)
+		body := "SENT: false\n" + render(name, run.Facts)
 		path := filepath.Join(d, name)
 		if err := os.WriteFile(path, []byte(body), state.FilePerm); err != nil {
 			return nil, err

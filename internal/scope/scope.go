@@ -31,7 +31,8 @@ const (
 	KindHTTPS  Kind = "https"
 	KindPage   Kind = "page"
 	KindWallet Kind = "wallet"
-	KindRPC    Kind = "rpc"
+	KindRPC      Kind = "rpc"
+	KindLoopback Kind = "loopback"
 )
 
 const Affirmation = "I operate these"
@@ -331,11 +332,53 @@ func Normalize(kind Kind, name string) (string, error) {
 		return normalizeHost(name)
 	case KindPage, KindRPC:
 		return normalizeURL(kind, name)
+	case KindLoopback:
+		return normalizeLoopback(name)
 	case KindWallet:
 		return normalizeWallet(name)
 	default:
 		return "", fmt.Errorf("unknown kind %q", kind)
 	}
+}
+
+func normalizeLoopback(name string) (string, error) {
+	host := strings.TrimSpace(strings.ToLower(name))
+	if h, _, err := net.SplitHostPort(host); err == nil {
+		host = h
+	}
+	if host != "127.0.0.1" {
+		return "", errors.New("loopback scope accepts only 127.0.0.1")
+	}
+	return host, nil
+}
+
+// AttestLoopback marks a declared loopback name as verified without a public
+// TXT challenge. Any other host stays unverified.
+func (s *Store) AttestLoopback(kind Kind, name string, now time.Time) error {
+	norm, err := Normalize(kind, name)
+	if err != nil {
+		return err
+	}
+	host := norm
+	if kind == KindPage || kind == KindRPC {
+		u, err := url.Parse(norm)
+		if err != nil {
+			return err
+		}
+		host = u.Hostname()
+	}
+	if host != "127.0.0.1" {
+		return errors.New("refusing loopback attestation for a non-loopback host")
+	}
+	for i := range s.Data.Assets {
+		if s.Data.Assets[i].Kind == kind && s.Data.Assets[i].Name == norm {
+			s.Data.Assets[i].Verified = true
+			s.Data.Assets[i].VerifyBy = "attestation=loopback-demo"
+			s.Data.Assets[i].VerifiedAt = now.UTC()
+			return nil
+		}
+	}
+	return fmt.Errorf("not in scope: %s %s", kind, norm)
 }
 
 func normalizeHost(name string) (string, error) {
