@@ -1,0 +1,23 @@
+Perimeter Sentinel
+Copyright 2026 Phillip Holland
+
+This product is licensed under the Apache License, Version 2.0.
+See the LICENSE file.
+
+The Go module has no third-party module requirements in v0.1.
+The standard library is used as provided by the Go project under its own license terms.
+
+Not included, and not linked, in this tree:
+
+- OpenZeppelin Monitor (AGPL-3.0). An operator may run it as a separate process and feed observations in as files. Do not import it.
+- Unleash (AGPL-3.0) and Flipt (FCL). Kill switches are a local file in internal/freeze/flags. They do not call a flag vendor.
+- JA4+ implementations under the FoxIO License. Lane features in v0.1 do not use JA4+.
+- TruffleHog, the Wazuh engine, and Velociraptor. Not dependencies.
+- jacobbednarz/go-csp-collector (MIT), SSLMate certspotter (MPL-2.0), and TwiN/gatus (Apache-2.0). v0.1 reads operator-supplied files instead of vendoring these programs.
+- Open Policy Agent. policy/*.rego is a mirror for a later conftest job. The binary evaluator is internal/policy and does not shell out.
+
+SEAL Frameworks are CC BY-SA 4.0, published by the Security Alliance. This repository does not copy that text and does not relicense it. profiles/custody-ops/seal/README.md is an attribution and a pointer.
+
+docs/freeze-desk/roles.md is an original description of the scribe and commander split. The role names are a common incident-response practice, also described in PagerDuty's incident-response docs (Apache-2.0, https://github.com/PagerDuty/incident-response-docs). This file does not copy that repository's text.
+
+Research notes at the repository root (PRODUCT.md, RESEARCH.md, SECURITY_SCHOOL.md, and the other pack files) are part of this project and are under the same Apache-2.0 license unless a line in the file says a quoted source is under another license. Quoted sources stay under their own licenses.
