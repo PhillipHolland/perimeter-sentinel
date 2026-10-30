@@ -33,6 +33,7 @@ func Render(c Card) (string, error) {
 	return fmt.Sprintf(`# %s
 
 Status: draft. This file is not a merged change.
+Apply: false
 Lesson: %s
 Expires: %s
 
